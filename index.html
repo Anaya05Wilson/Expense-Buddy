@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Expense Splitter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="theme-toggle">
+        <button id="darkModeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <header>
+        <h1>Group Expense Splitter</h1>
+        <button class="primary-btn" id="getStarted">Get Started</button>
+    </header>
+
+    <main>
+        <section class="setup-section">
+            <h2>Group Setup</h2>
+            <div class="currency-selector">
+                <label for="currency">Select Currency:</label>
+                <select id="currency">
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                    <option value="INR">INR (₹)</option>
+                </select>
+            </div>
+            <form id="groupSetupForm">
+                <div class="input-group">
+                    <label for="numPeople">Number of People:</label>
+                    <input type="number" id="numPeople" min="2" required>
+                </div>
+                <div id="nameInputs" class="name-inputs"></div>
+                <button type="submit" class="primary-btn">Continue</button>
+            </form>
+        </section>
+
+        <section class="expenses-section" style="display: none;">
+            <h2>Add Expenses</h2>
+            <form id="expenseForm">
+                <div class="expense-grid">
+                    <div class="input-group">
+                        <label for="payer">Paid By:</label>
+                        <select id="payer" required></select>
+                    </div>
+                    <div class="input-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" step="0.01" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="category">Category:</label>
+                        <select id="category" required>
+                            <option value="food">🍽️ Food</option>
+                            <option value="travel">✈️ Travel</option>
+                            <option value="stay">🏨 Stay</option>
+                            <option value="misc">📦 Misc</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="shared-with">
+                    <label>Shared With:</label>
+                    <div id="sharedWithCheckboxes" class="checkbox-grid"></div>
+                </div>
+                <button type="submit" class="primary-btn">Add Expense</button>
+            </form>
+            
+            <div class="chart-container">
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </section>
+
+        <section class="summary-section" style="display: none;">
+            <h2>Summary</h2>
+            <div class="summary-controls">
+                <button class="secondary-btn" onclick="sortExpenses('amount')">
+                    Sort by Amount
+                </button>
+                <button class="secondary-btn" onclick="sortExpenses('category')">
+                    Sort by Category
+                </button>
+            </div>
+            <div class="summary-grid" id="summaryGrid"></div>
+            <button id="downloadPDF" class="secondary-btn">
+                <i class="fas fa-download"></i> Download Summary (PDF)
+            </button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
